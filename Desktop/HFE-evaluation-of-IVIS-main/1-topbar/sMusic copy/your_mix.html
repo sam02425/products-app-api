@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
+      <link rel="stylesheet" href="style_music.css">
+      <link rel="stylesheet" href="/1-topbar/m_style.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
+      <title>Document</title>
+   </head>
+   <body>
+   <!--Navbar Top starts -->
+   <nav class="navbar fixed-top navbar-expand-sm navbar-dark bg-dark">
+      <div class="container">
+         <a href="" class="navbar-brand">IVIS</a>
+         <ul class="navbar-nav nav-fill w-100">
+            <li class="nav-item is-active">
+               <a href="/1-topbar/dashboard.html" class="nav-link"><i class="fas fa-tachometer-alt fa-lg m-1"></i>Dashboard</a>
+            </li>
+            <li class="nav-item">
+               <a href="/1-topbar/music.html" class="nav-link is-active"><i class="fas fa-music fa-lg m-1"></i>Music</a>
+            </li>
+            <li class="nav-item">
+               <a href="/1-topbar/map.html" class="nav-link"><i class="fas fa-map-marked-alt fa-lg m-1"></i>Map</a>
+             </li>
+            <li class="nav-item">
+               <a href="/1-topbar/s&m.html" class="nav-link"><i class="fas fa-tools fa-lg m-1"></i>Service</a>
+            </li>
+            <li class="nav-item">
+               <a href="/1-topbar/control.html" class="nav-link"><i class="fas fa-cogs fa-lg m-1"></i>Control</a>
+            </li>
+         </ul>
+      </div>
+   </nav>
+         <!--Navbar Top Ends-->
+         <!--Navbar Bottom starts-->
+         <nav class="navbar fixed-bottom navbar-expand-sm navbar-dark bg-dark">
+            <div class="container m-0">
+               <ul class="navbar-nav nav-fill w-100">
+                  <div class="nav-item f_contol">
+                     <ul>
+                        <li class="f_contol-item">
+                           <a href="#" class="down" id="f_decrease"><i class="fas fa-angle-double-down fa-lg"></i></a>
+                        </li>
+                        <li class="f_contol-item">
+                           <span class="m_num nav-link" id="f_size"><i class="fas fa-fan"></i>1</span>
+                        </li>
+                        <li class="f_contol-item">
+                           <a href="#" class="up" id="f_increase"><i class="fas fa-angle-double-up fa-lg"></i></a>
+                        </li>
+                     </ul>
+                  </div>
+                  <li class="nav-item">
+                     <div class="custom-select" style="width:100px; margin: 5px 50px; padding: 2px;">
+                        <select>
+                           <option value="0">Vent:</option>
+                           <option value="1">Up</option>
+                           <option value="2">Leg</option>
+                           <option value="3">Up & Leg</option>
+                           <option value="4">Windshield & Leg</option>
+                           <option value="5">Windshield</option>
+                           <option value="6">Windshield & Rear</option>
+                        </select>
+                      </div>
+                  </li>
+                  <div class="nav-item t_contol">
+                     <ul>
+                        <li class="t_contol-item">
+                           <a href="#" class="down" id="t_decrease"><i class="fas fa-angle-double-down fa-2x"></i></a>
+                        </li>
+                        <li class="t_contol-item">
+                           <span class="m_num nav-link" id="t_size">68</span>
+                        </li>
+                        <li class="t_contol-item">
+                           <a href="#" class="up" id="t_increase"><i class="fas fa-angle-double-up fa-2x"></i></a>
+                        </li>
+                     </ul>
+                  </div>
+                  <li class="nav-item">
+                     <a href="#" class="nav-link">Phone</a>
+                  </li>
+                  <li class="nav-item">
+                     <div class="range-container">
+                        <input type="range" id="range" min="0" max="100">
+                        <label for="range"><i class="fas fa-volume-up"></i> 50</label>
+                    </div>
+                  </li>
+               </ul>
+            </div>
+         </nav>
+
+      <!--Main-->
+      <div class="wrapper">
+         <aside class="sidebar">
+            <ul class="sidebar__main-links">
+               <li>Browse</li>
+               <li>Radio</li>
+            </ul>
+            <ul class="sidebar__music">
+               <h2 class="sidebar__header">Your Music</h2>
+               <li><a class="link is-active" href="your_mix.html">Your Daily Mix</a></li>
+               <li><a class="link" href="songs.html">Songs</a></li>
+               <li><a class="link" href="albums.html">Albums</a></li>
+               <li><a class="link" href="artists.html">Artists</a></li>
+               <li>Stations</li>
+               <li>Local Files</li>
+            </ul>
+            <ul class="sidebar__playlists">
+               <h2 class="sidebar__header">Playlists</h2>
+               <li>Liked from Radio</li>
+               <li>Indie Pop</li>
+               <li>Roadtrip</li>
+               <li>Release Radar</li>
+               <li>Focus</li>
+               <li>Piano Mood</li>
+               <li>Your Summer Rewind</li>
+               <li>Inspire</li>
+               <li>Alternative Faves</li>
+            </ul>
+         </aside>
+         <main>
+            <header class="main__header">
+               <h1>Browse</h1>
+            </header>
+            <nav class="main__nav"><a class="link" href="../music.html">Overview</a><a class="link" href="charts.html">Charts</a><a class="link" href="Genres&Moods.html">Genres and Moods</a><a class="link" href="new_releases.html">New Releases</a><a class="link" href="discover.html">Discover</a><a class="link" href="#">More</a></nav>
+            <section class="main__playlists">
+               <h2>Featured Lists</h2>
+               <ul class="music__list">
+                  <li class="music__list-item"><a style="text-decoration: none;" href="./music/index.html"><span style="font-size: larger; color: aliceblue;" class="song__title"><strong>Just Go</strong></span></a><br><span class="song__creator"><em>The Goes</em> </span></li>
+                  <li class="music__list-item"><a style="text-decoration: none;" href="./music/index.html"><span style="font-size: larger; color: aliceblue;" class="song__title"><strong>Fanboy</strong></span></a><br><span class="song__creator"><em>Young Joe</em> </span></li>
+                  <li class="music__list-item"><a style="text-decoration: none;" href="./music/index.html"><span style="font-size: larger; color: aliceblue;" class="song__title"><strong>Fly</strong></span></a><br><span class="song__creator"><em>20 Cent</em> </span></li>
+                  <li class="music__list-item"><a style="text-decoration: none;" href="./music/index.html"><span style="font-size: larger; color: aliceblue;" class="song__title"><strong>Jack and Jill</strong></span></a><br><span class="song__creator"><em>Evan</em> </span></li>
+                  <li class="music__list-item"><a style="text-decoration: none;" href="./music/index.html"><span style="font-size: larger; color: aliceblue;" class="song__title"><strong>Home and Country</strong></span></a><br><span class="song__creator"><em>Wandering Ants</em> </span></li>
+                  <li class="music__list-item"><a style="text-decoration: none;" href="./music/index.html"><span style="font-size: larger; color: aliceblue;" class="song__title"><strong>Just Chill</strong></span></a><br><span class="song__creator"><em>The Creatives</em> </span></li>
+                  <li class="music__list-item"><a style="text-decoration: none;" href="./music/index.html"><span style="font-size: larger; color: aliceblue;" class="song__title"><strong>Roadtripping</strong></span></a><br><span class="song__creator"><em>The Wayfarers</em> </span></li>
+                  <li class="music__list-item"><a style="text-decoration: none;" href="./music/index.html"><span style="font-size: larger; color: aliceblue;" class="song__title"><strong>Day Dream</strong></span></a><br><span class="song__creator"><em>Jack</em> </span></li>
+                  <li class="music__list-item"><a style="text-decoration: none;" href="./music/index.html"><span style="font-size: larger; color: aliceblue;" class="song__title"><strong>All feelings</strong></span></a><br><span class="song__creator"><em>Ramsy</em> </span></li>
+                  <li class="music__list-item"><a style="text-decoration: none;" href="./music/index.html"><span style="font-size: larger; color: aliceblue;" class="song__title"><strong>As we are</strong></span></a><br><span class="song__creator"><em>Robin</em> </span></li>
+                  <li class="music__list-item"><a style="text-decoration: none;" href="./music/index.html"><span style="font-size: larger; color: aliceblue;" class="song__title"><strong>Love Song</strong></span></a><br><span class="song__creator"><em>The Sprints</em> </span></li>
+               </ul>
+            </section>
+         </main>
+         <aside class="activity">
+            <h2>Friend Activity</h2>
+            <button class="button">Find Friends</button>
+         </aside>
+      </div>
+      <footer class="footer">
+         <div class="now-playing">
+            <img class="album__image" src="https://images.unsplash.com/photo-1515233451477-90d9cd4d57ed?ixlib=rb-0.3.5&amp;q=85&amp;fm=jpg&amp;crop=entropy&amp;cs=srgb&amp;ixid=eyJhcHBfaWQiOjE0NTg5fQ&amp;s=cade564aeff757d648625aaac06e837c"/>
+            <div class="album__info"><span class="album__title">Stay There Now</span><span class="album__musician">The Harmonics</span></div>
+         </div>
+         <div class="play-controls"><i class="fas fa-fast-backward"></i><i class="fas fa-play-circle"></i><i class="fas fa-fast-forward"></i></div>
+         <div class="play-device-controls"><i class="fas fa-volume-up"></i></div>
+      </footer>
+      <script src="mscript.js"></script>
+      <script src="/1-topbar/controlp_script.js"></script>
+   </body>
+</html>

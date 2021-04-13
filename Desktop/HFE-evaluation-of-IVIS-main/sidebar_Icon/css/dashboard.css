@@ -1,0 +1,485 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@300;700&display=swap');
+
+
+/* Sidebar */
+
+*{
+    margin: 0;
+    list-style: none;
+    padding: 0;
+    text-decoration: none;
+    box-sizing: border-box;
+    font-family: 'Open Sans', sans-serif  ;
+}
+slider {height:400px;}
+
+body {
+    background-color: white;
+    width: 100vw;
+    height: 100vh;
+}
+
+.m_wrapper {
+    margin: 3px;
+}
+
+.m_wrapper .top_navbar{
+    position: fixed;
+    width: calc(100vw - 20px);
+    height: 60px;
+    display: flex;
+    overflow: hidden;
+    top: 3px;
+    z-index: 1;
+}
+
+.m_wrapper .top_navbar .hamburger {
+    width: 70px;
+    height: 100%;
+    background: royalblue;
+    padding: 15px 17px;
+    cursor: pointer;
+    border-top-left-radius: 10px ;
+}
+
+.m_wrapper .top_navbar .hamburger div {
+    width: 35px;
+    height: 5px;
+    background-color: black;
+    margin: 5px;
+    border-radius: 5px;
+}
+
+.m_wrapper .top_navbar .top_menu {
+    width: calc(100% - 70px);
+    background: #fff;
+    height: 100%;
+    border-top-right-radius: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+.m_wrapper .top_navbar .top_menu .logo{
+    color: black;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 3px;
+}
+
+.m_wrapper .top_navbar .top_menu ul{
+    display: flex;
+
+}
+
+.m_wrapper .top_navbar .top_menu ul li a {
+    display: block;
+    margin: 0 10px;
+    width: 35px;
+    height: 35px;
+    border: 1px solid #2e2e2e;
+    line-height: 35px;
+    text-align: center;
+    border-radius: 50%;
+    color: royalblue;
+}
+
+.m_wrapper .top_navbar .top_menu ul li a:hover {
+    background-color: royalblue;
+    color: white;
+}
+
+.m_wrapper .sidebar{
+    position: fixed;
+    top: 64px;
+    left: 3px;
+    background: royalblue;
+    width: 170px;
+    height: calc(100% - 73px);
+    border-bottom-left-radius: 20px;
+    transition: all 0.2s ease;
+}
+
+.m_wrapper .sidebar ul {
+    position: fixed;
+    margin: 0px;
+    padding: 0px;
+}
+
+.m_wrapper .sidebar ul li a {
+    display: block;
+    text-decoration: none;
+    margin: 0px;
+    padding: 15px 5px;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 30px;
+    font-stretch: expanded;
+    font-family: Open Sans Condensed;
+    margin-bottom: 1px;
+    color: white;
+    position: relative;
+    white-space: nowrap;
+}
+
+.m_wrapper .sidebar ul li a:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0px;
+    height: 100%;
+    background-color: royalblue;
+}
+
+.m_wrapper .sidebar ul li a span.title {
+    display: inline-block;
+}
+
+.m_wrapper .sidebar ul li a:hover,
+.m_wrapper .sidebar ul li a.active {
+    background: white;
+    color: royalblue;
+}
+
+.m_wrapper .sidebar ul li a:hover:before,
+.m_wrapper .sidebar ul li a.active:before {
+    display: block;
+}
+
+.main_container {
+    width: calc(100% - 200px);
+    margin-top: 13px;
+    margin-left: 170px;
+    padding: 1px;
+    transition: all 0.1s ease-in-out;
+}
+
+.m_wrapper .main_container {
+    background: #fff;
+    margin-bottom: 10px;
+    margin-top: 15px;
+    font-size: 15px;
+    line-height: 25px;
+}
+
+.m_wrapper .main_container .c_container {
+    margin: 15px;
+}
+
+/* Sidebar collapse 
+.m_wrapper.collapse .sidebar {
+    width: 70px;
+    transition: all 0.1s ease-in;
+}
+
+.m_wrapper.collapse .sidebar ul li a{
+    text-align: center;
+}
+
+.m_wrapper.collapse .sidebar_title {
+    display: none;
+}
+
+.m_wrapper.collapse .sidebar ul li a span.icon{
+    margin: 0;
+    transition: all 0.1s ease-in-out;
+}
+
+.m_wrapper.collapse .main_container {
+    width: calc(100% - 70px);
+    margin-left: 70px;
+} */
+
+
+/* Bottom navbar */
+
+/* https://stackoverflow.com/questions/15935837/how-to-display-a-range-input-slider-vertically */
+
+
+/* Fan adjust bar */
+.f_contol {
+    width: 60px;
+    height: 10px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.f_contol-item {
+    display: inline-flex;
+}
+
+
+/* Temperature adjust bar */
+
+.t_contol {
+    width: 100px;
+    height: 10px;
+    margin: 0px;
+    padding: 0px;
+}
+
+.t_contol-item {
+    display: inline-flex;
+    margin: 0px;
+    padding: 0px;
+}
+
+#t_size {
+    width: 60px;
+    height: 10px;
+    margin-right: 1px;
+    padding: 0px;
+}
+
+.m_num {
+    text-decoration: none;
+
+}
+
+/* Temperature/Fan adjust icons */
+
+
+.up {
+    float: left;
+    margin: 0;
+    padding: 5px;
+    color: red;
+    border-radius: 10%;
+    background-color: black;
+}
+
+.down {
+    float: right;
+    float: left;
+    margin: 0;
+    padding: 5px;
+    border-radius: 10%;
+    background-color: black;
+    color: green;
+}
+
+
+/* Volume bar */
+
+.range-container {
+    position: absolute;
+    right: 30px;
+}
+
+input[type='range'] {
+    width: 200px;
+    margin: 18px 0;
+    -webkit-appearance: none;
+}
+
+input[type='range']:focus {
+    outline: none;
+}
+
+input[type='range'] + label {
+    background-color: #fff;
+    position: absolute;
+    top: -25px;
+    left: 110px;
+    width: 50px;
+    padding: 5px 0px;
+    text-align: center;
+    border-radius: 4px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+/* Chrome & Safari */
+
+input[type='range']::-webkit-slider-runnable-track {
+    background-color: fff;
+    border-radius: 1px;
+    width: 100%;
+    height: 10px;
+    cursor: pointer;
+}
+
+input[type='range']::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 24px;
+    width: 24px;
+    background: royalblue;
+    border: 1px double rgb(230, 223, 223);
+    margin-top: -7px;
+    cursor: pointer;
+}
+
+/* IE */
+
+input[type='range']::-ms-track {
+    background-color: rgb(207, 201, 201);
+    border-radius: 1px;
+    width: 100%;
+    height: 10px;
+    cursor: pointer;
+}
+
+input[type='range']::-ms-thumb {
+    -webkit-appearance: none;
+    height: 24px;
+    width: 24px;
+    background: rgb(34, 34, 30);
+    border: 1px solid rgb(230, 223, 223);
+    margin-top: -7px;
+    cursor: pointer;
+}
+
+/* Firefox */
+
+input[type='range']::-moz-range-track {
+    background-color: rgb(207, 201, 201);
+    border-radius: 1px;
+    width: 100%;
+    height: 10px;
+    cursor: pointer;
+}
+
+input[type='range']::-moz-range-thumb {
+    -webkit-appearance: none;
+    height: 24px;
+    width: 24px;
+    background: rgb(34, 34, 30);
+    border: 1px solid rgb(230, 223, 223);
+    margin-top: -7px;
+    cursor: pointer;
+}
+
+
+
+
+/* Volume bar 
+.vol  {
+    position: relative;
+    margin: 1px;
+    padding: 1px;
+    float: right;
+    text-align: center;
+    max-width: 20%
+
+}
+
+input[type=range].range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 10px;
+    height: 10px;
+    background-color: #555;
+}
+
+input[type=range].round {
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px
+}
+
+.vertical-heighest-first {
+    position: absolute;
+    bottom: 60px;
+    -webkit-transform: rotate(270deg);
+    -moz-transform: rotate(270deg);
+    -o-transform: rotate(270deg);
+    -ms-transform: rotate(270deg);
+    transform: rotate(270deg)
+}
+
+.range-wrap{
+    width: 100px;
+    position: relative;
+  }
+  
+  .range-value{
+    position: absolute;
+    top: -50%;
+  }
+
+  .range-value span {
+    width: 30px;
+    height: 24px;
+    bottom: 60px;
+    margin-left: 40px;
+    line-height: 24px;
+    text-align: center;
+    background: #03a9f4;
+    color: #fff;
+    font-size: 12px;
+    display: block;
+    position: absolute;
+    left: 50%;
+    transform: translate(10%, 0);
+    border-radius: 6px;
+  }
+
+  .range-value span:before {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-top: 10px solid #03a9f4;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    margin-top: -1px;
+  } */
+
+  /* car control image */
+
+
+  .c_container {
+      position: relative;
+      display: flex;
+  }
+
+  .car_c_img {
+      vertical-align: middle;
+      position: relative;
+      object-fit: cover;
+      top: 30px;
+      height: 300px;
+      width: 300px;
+  }
+
+  /* car control button */
+
+  
+
+.car_front_control {
+    position:absolute;
+    top: 120px;
+    left: 370px;
+}
+
+.car_mid_control {
+    position:absolute;
+    top: 290px;
+    left: 230px;
+}
+
+.car_back_control {
+    position:absolute;
+    top: 470px;
+    left: 370px;
+}
+
+.c_control {
+    font-size: 50px;
+    cursor: pointer;
+    user-select: none;
+}
+
+
+.fa-lock {
+    color: red;
+}
+
+.fa-unlock {
+    color: green;
+}

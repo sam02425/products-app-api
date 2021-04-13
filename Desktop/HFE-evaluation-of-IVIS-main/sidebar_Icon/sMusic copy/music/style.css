@@ -1,0 +1,300 @@
+@import "//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.css";
+ .screen-reader-text {
+	/* Reusable, toolbox kind of class */
+	 position: absolute;
+	 top: -9999px;
+	 left: -9999px;
+}
+ .disabled {
+	 color: #666;
+	 cursor: default;
+}
+ .show {
+	 display: inline-block !important;
+}
+ 
+ .player_container {
+	 font-family: arial, helvetica, sans-serif;
+	 font-size: 1em;
+	 margin: 0 auto;
+	 width: 500px;
+	 background-color: #0e0e0e;
+}
+.player_container .player {
+	 height: 200px;
+	 margin: 5px;
+	 position: relative;
+	 width: 400px;
+	/* Small devices (tablets, 768px and up) */
+	/* Small devices (tablets, 768px and up) */
+	/* Medium devices (desktops, 992px and up) */
+	/* Small devices (tablets, 768px and up) */
+	/* Large devices (large desktops, 1200px and up) */
+	 *zoom: 1;
+}
+ @media (min-width: 768px) and (max-width: 991px) {
+	.player_container .player {
+		 width: 470px;
+	}
+}
+ @media (min-width: 992px) and (max-width: 1100px) {
+	  .player_container .player {
+		 width: 470px;
+	}
+}
+ @media (min-width: 1200px) {
+	  .player_container .player {
+		 width: 470px;
+	}
+}
+  .player_container .player .large-toggle-btn {
+	 
+	 cursor: pointer;
+	 float: left;
+	 font-size: 2.5em;
+	 height: 80px;
+	 top: 15px;
+	 margin: 0 10px 0 0;
+	 overflow: hidden;
+	 padding: 5px 0 0 0;
+	 position: relative;
+	 text-align: center;
+	 vertical-align: bottom;
+	 width: 80px;
+	 color: white;
+}
+  .player_container .player .large-toggle-btn .large-play-btn {
+	 cursor: pointer;
+	 display: inline-block;
+	 position: relative;
+	 top: -14%;
+
+}
+.player .large-toggle-btn .large-play-btn:before {
+	 content: "\f04b";
+	 font: 2.5em/1.75 "FontAwesome";
+	 color: green;
+	 
+}
+.player .large-toggle-btn .large-pause-btn {
+	 cursor: pointer;
+	 display: inline-block;
+	 position: relative;
+	 top: -13%;
+}
+.player .large-toggle-btn .large-pause-btn:before {
+	 content: "\f04c";
+	 font: 2.5em/1.75 "FontAwesome";
+	 color: white;
+	 
+}
+
+.track-img img {
+	height: 150px;
+    width: 250px;
+    margin-left: 15px;
+    padding: 1px;
+}
+
+.player .info-box {
+	 bottom: 10px;
+	 left: 65px;
+	 position: absolute;
+	 top: 15px;
+}
+.player .info-box .track-info-box {
+	 float: left;
+	 font-size: 12px;
+	 margin: 0 0 6px 0;
+	 visibility: hidden;
+	 width: 400px;
+	 *zoom: 1;
+}
+ .player .info-box .track-info-box .track-title-text {
+	 display: inline-block;
+	 padding: 5px;
+     margin: 5px;
+}
+ .player .info-box .track-info-box .audio-time {
+	 display: inline-block;
+	 padding: 0 0 0 5px;
+	 width: 80px;
+}
+  .player .info-box .track-info-box:before,  .player_container .player .info-box .track-info-box:after {
+	 content: " ";
+	 display: table;
+}
+  .player_container .player .info-box .track-info-box:after {
+	 clear: both;
+	 display: block;
+	 font-size: 0;
+	 height: 0;
+	 visibility: hidden;
+}
+  .player_container .player .progress-box {
+	 float: left;
+	 min-width: 270px;
+	 position: relative;
+}
+  .player_container .player .progress-box .progress-cell {
+	 height: 12px;
+	 position: relative;
+}
+  .player_container .player .progress-box .progress-cell .progress {
+	 background: #fff;
+	 height: 8px;
+	 position: relative;
+	 width: auto;
+}
+  .player_container .player .progress-box .progress-cell .progress .progress-buffer {
+	 background: #337ab7;
+	 height: 100%;
+	 width: 0;
+}
+  .player_container .player .progress-box .progress-cell .progress .progress-indicator {
+	 
+	 cursor: pointer;
+	 height: 10px;
+	 left: 0;
+	 overflow: hidden;
+	 position: absolute;
+	 top: -2px;
+	 width: 22px;
+}
+  .player_container .player .controls-box {
+	 bottom: 10px;
+	 left: 350px;
+	 position: absolute;
+	 padding: 0px;
+     margin: 0px;
+}
+ .controls-box .previous-track-btn {
+	 cursor: pointer;
+	 display: inline-block;
+	 padding: 10px;
+     margin: 1px;
+}
+  .player_container .player .controls-box .previous-track-btn:before {
+	 content: "\f049";
+	 font: 2em "FontAwesome";
+}
+ .controls-box .next-track-btn {
+	 cursor: pointer;
+
+	 display: inline-block;
+	 padding: 10px;
+     margin: 1px;
+}
+  .player_container .player .controls-box .next-track-btn:before {
+	 content: "\f050";
+	 font: 2em "FontAwesome";
+}
+  .player_container .player:before,  .player_container .player:after {
+	 content: " ";
+	 display: table;
+}
+  .player_container .player:after {
+	 clear: both;
+	 display: block;
+	 font-size: 0;
+	 height: 0;
+	 visibility: hidden;
+}
+  .player_container .play-list {
+	display: flex;
+    flex-direction: column;
+    margin: 50px;
+    padding: 5px;
+    width: 400px;
+}
+ .player_container .play-list .play-list-row {
+    display: inline-flex;
+    margin: 1px;
+    padding: 5px;
+	 
+}
+  .player_container .play-list .play-list-row .track-title .playlist-track {
+	 color: white;
+	 text-align: center;
+	 text-decoration: none;
+}
+  .player_container .play-list .play-list-row .track-title .playlist-track:hover {
+	 text-decoration: underline;
+}
+  .player_container .play-list .play-list-row .small-toggle-btn {
+	 
+	 cursor: pointer;
+	 display: inline-block;
+	 height: 30px;
+	 margin-right: 10px;
+	 margin-top: 20px;
+	 margin-left: 20px;
+	 padding: -1px;
+	 position: relative;
+	 text-align: center;
+	 vertical-align: middle;
+	 width: 30px;
+}
+  .player_container .play-list .play-list-row .small-toggle-btn .small-play-btn {
+	 display: inline-block;
+}
+  .player_container .play-list .play-list-row .small-toggle-btn .small-play-btn:before {
+	 content: "\f04b";
+	 font: 1.85em "FontAwesome";
+	 color: green;
+}
+  .player_container .play-list .play-list-row .small-toggle-btn .small-pause-btn {
+	 display: inline-block;
+}
+  .player_container .play-list .play-list-row .small-toggle-btn .small-pause-btn:before {
+	 content: "\f04c";
+	 font: 1.85em "FontAwesome";
+	 color: white;
+}
+  .player_container .play-list .play-list-row .track-number {
+	display: inline-block;
+    text-align: end;
+    margin: 25px 30px;
+    padding: 5px;
+}
+  .player_container .play-list .play-list-row .track-title {
+    display: inline-block;
+    text-align: center;
+    margin: 5px;
+    padding: 5px;
+	font-size: larger;
+	font-weight: bolder;
+	color: white;
+	text-decoration: none;
+}
+  .player_container .play-list .play-list-row .track-title .playlist-track {
+	 text-decoration: none;
+}
+  .player_container .play-list .play-list-row .track-title .playlist-track:hover {
+	 text-decoration: underline;
+}
+  .player_container .play-list .play-list-row .track-title.active-track {
+	text-decoration: none;
+	color: white;
+}
+  .player_container .play-list .play-list-row:before,  .player_container .play-list .play-list-row:after {
+	clear: both;
+	display: block;
+	font-size: 10px;
+	height: 10px;
+	visibility: hidden;
+}
+  .player_container .play-list .play-list-row:after {
+	 clear: both;
+	 display: block;
+	 font-size: 0;
+	 height: 0;
+	 visibility: hidden;
+}
+
+#thumbnail {
+    position: absolute;
+    width: 100%;
+    top: 7%;
+    transition: 1s;
+}

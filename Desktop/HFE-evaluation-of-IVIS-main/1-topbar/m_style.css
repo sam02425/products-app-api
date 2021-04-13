@@ -1,0 +1,309 @@
+
+/* box-sizing so padding or margin wont affect the actual size.*/ 
+
+/* https://stackoverflow.com/questions/15935837/how-to-display-a-range-input-slider-vertically */
+
+
+.nav-item .is-active {
+    color: white;
+    background-color: rgb(61, 102, 224);  
+    font-size: 20px;
+    text-decoration: none;
+    padding: 1px 2px;
+    margin: 2px;
+}
+
+
+
+.vent {
+    height: 20px;
+    width: 20px;
+    text-decoration: none;
+    border: 0.5px black;
+}
+
+/* Fan adjust bar */
+.f_contol {
+    width: 60px;
+    height: 10px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.f_contol-item {
+    display: inline-flex;
+}
+
+
+/* Temperature adjust bar */
+
+.t_contol {
+    width: 100px;
+    height: 10px;
+    margin: 0px;
+    padding: 0px;
+}
+
+.t_contol-item {
+    display: inline-flex;
+}
+
+#t_size {
+    width: 60px;
+    height: 10px;
+    margin-right: 1px;
+    padding: 0px;
+}
+
+.m_num {
+    text-decoration: none;
+
+}
+
+/* Temperature/Fan adjust icons */
+
+
+.up {
+    float: left;
+    margin: 0;
+    padding: 5px;
+    color: red;
+    border-radius: 10%;
+    background-color: black;
+}
+
+.down {
+    float: right;
+    float: left;
+    margin: 0;
+    padding: 5px;
+    border-radius: 10%;
+    background-color: black;
+    color: green;
+}
+
+
+/* Volume bar */
+
+.range-container {
+    position: absolute;
+    right: 30px;
+}
+
+input[type='range'] {
+    width: 200px;
+    margin: 18px 0;
+    -webkit-appearance: none;
+}
+
+input[type='range']:focus {
+    outline: none;
+}
+
+input[type='range'] + label {
+    background-color: #fff;
+    position: absolute;
+    top: -25px;
+    left: 110px;
+    width: 50px;
+    padding: 5px 0px;
+    text-align: center;
+    border-radius: 4px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+/* Chrome & Safari */
+
+input[type='range']::-webkit-slider-runnable-track {
+    background-color: fff;
+    border-radius: 1px;
+    width: 100%;
+    height: 10px;
+    cursor: pointer;
+}
+
+input[type='range']::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 24px;
+    width: 24px;
+    background: royalblue;
+    border: 1px double rgb(230, 223, 223);
+    margin-top: -7px;
+    cursor: pointer;
+}
+
+/* IE */
+
+input[type='range']::-ms-track {
+    background-color: rgb(207, 201, 201);
+    border-radius: 1px;
+    width: 100%;
+    height: 10px;
+    cursor: pointer;
+}
+
+input[type='range']::-ms-thumb {
+    -webkit-appearance: none;
+    height: 24px;
+    width: 24px;
+    background: rgb(34, 34, 30);
+    border: 1px solid rgb(230, 223, 223);
+    margin-top: -7px;
+    cursor: pointer;
+}
+
+/* Firefox */
+
+input[type='range']::-moz-range-track {
+    background-color: rgb(207, 201, 201);
+    border-radius: 1px;
+    width: 100%;
+    height: 10px;
+    cursor: pointer;
+}
+
+input[type='range']::-moz-range-thumb {
+    -webkit-appearance: none;
+    height: 24px;
+    width: 24px;
+    background: rgb(34, 34, 30);
+    border: 1px solid rgb(230, 223, 223);
+    margin-top: -7px;
+    cursor: pointer;
+}
+
+
+
+
+/* Volume bar 
+.vol  {
+    position: relative;
+    margin: 1px;
+    padding: 1px;
+    float: right;
+    text-align: center;
+    max-width: 20%
+
+}
+
+input[type=range].range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 10px;
+    height: 10px;
+    background-color: #555;
+}
+
+input[type=range].round {
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px
+}
+
+.vertical-heighest-first {
+    position: absolute;
+    bottom: 60px;
+    -webkit-transform: rotate(270deg);
+    -moz-transform: rotate(270deg);
+    -o-transform: rotate(270deg);
+    -ms-transform: rotate(270deg);
+    transform: rotate(270deg)
+}
+
+.range-wrap{
+    width: 100px;
+    position: relative;
+  }
+  
+  .range-value{
+    position: absolute;
+    top: -50%;
+  }
+
+  .range-value span {
+    width: 30px;
+    height: 24px;
+    bottom: 60px;
+    margin-left: 40px;
+    line-height: 24px;
+    text-align: center;
+    background: #03a9f4;
+    color: #fff;
+    font-size: 12px;
+    display: block;
+    position: absolute;
+    left: 50%;
+    transform: translate(10%, 0);
+    border-radius: 6px;
+  }
+
+  .range-value span:before {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-top: 10px solid #03a9f4;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    margin-top: -1px;
+  } */
+
+  /* car control image */
+
+
+  .c_container {
+      position: relative;
+      display: flex;
+  }
+
+  .car_c_img {
+      vertical-align: middle;
+      position: relative;
+      object-fit: cover;
+      top: 30px;
+      height: 300px;
+      width: 300px;
+  }
+
+  /* car control button */
+
+  
+
+.car_front_control {
+    position: absolute;
+    left: 295px;
+    top: 120px;
+}
+
+.car_mid_control {
+    position: absolute;
+    top: 300px;
+    left: 100px;
+}
+
+.car_back_control {
+    position: absolute;
+    top: 490px;
+    left: 290px;
+}
+
+.c_control {
+    font-size: 50px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.c_control:active {
+    color: blue;
+}
+
+.fa-lock {
+    color: red;
+}
+
+.fa-unlock {
+    color: green;
+}
