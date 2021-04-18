@@ -102,6 +102,7 @@ html, body {
 .wrapper main {
     grid-area: main;
     padding: 10px 20px;
+    margin-bottom: 200px;
 }
 @media (min-width: 800px) {
     main {
