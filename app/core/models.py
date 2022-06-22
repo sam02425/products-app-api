@@ -1,6 +1,8 @@
 """
 Database models
 """
+from pydoc import describe
+from django.conf import settings
 from django.db import models
 from django.contrib.auth.models import ( AbstractBaseUser, BaseUserManager, PermissionsMixin,)
 
@@ -40,3 +42,48 @@ class User(AbstractBaseUser, PermissionsMixin):
     objects = UserManager()
 
     USERNAME_FIELD = 'email'
+
+class Product(models.Model):
+    """Product object"""
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+    )
+    name = models.CharField(max_length=255)
+    manufacturer = models.OneToOneField('Manufacturer',on_delete=models.CASCADE)
+    description = models.TextField(blank=True)
+    size = models.OneToOneField('Size',on_delete=models.CASCADE)
+    stock = models.IntegerField(default=0)
+    weight = models.DecimalField(max_digits=5, decimal_places=2)
+    avalability = models.BooleanField(default=True)
+    price = models.DecimalField(max_digits=5, decimal_places=2)
+    ingridients = models.CharField(max_length=255)
+    category = models.ForeignKey('Category', on_delete=models.CASCADE)
+    link = models.CharField(max_length=255, blank=True)
+
+    def __str__(self):
+        return self.name
+
+class Manufacturer(models.Model):
+    """Manufacturer object"""
+    name = models.CharField(max_length=255)
+    link = models.CharField(max_length=255, blank=True)
+
+    def __str__(self):
+        return self.name
+
+class Size(models.Model):
+    """Size object"""
+    size = models.CharField(max_length=255)
+    weight = models.DecimalField(max_digits=5, decimal_places=2)
+
+    def __str__(self):
+        return self.name
+
+class Category(models.Model):
+    """Category object"""
+    name = models.CharField(max_length=255)
+    link = models.CharField(max_length=255, blank=True)
+
+    def __str__(self):
+        return self.name

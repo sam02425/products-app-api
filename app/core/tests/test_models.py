@@ -1,10 +1,14 @@
 """
 Tests for models.
 """
+from decimal import Decimal
+from pydoc import describe
+
 from unittest import expectedFailure
 from django.test import TestCase
 from django.contrib.auth import get_user_model
 
+from core import models
 
 class ModelTests(TestCase):
     """Test models."""
@@ -47,3 +51,39 @@ class ModelTests(TestCase):
 
         self.assertTrue(user.is_superuser)
         self.assertTrue(user.is_staff)
+
+    def test_create_product(self):
+        """Test creating a recipe"""
+        user = get_user_model().objects.create_user(
+            'test@example.com',
+            'test123',
+        )
+
+        size = models.Size.objects.create(
+            size='Small',
+            weight=Decimal('0.5'),
+        )
+
+        manufacturer= models.Manufacturer.objects.create(
+            name='Test Manufacturer',
+        )
+
+        category = models.Category.objects.create(
+            name='Test Catagory',
+        )
+
+        product = models.Product.objects.create(
+            user=user,
+            name='Steak',
+            size= size,
+            stock=10,
+            avalability=True,
+            category=category,
+            manufacturer= manufacturer,
+            weight = Decimal('1.0'),
+            price=Decimal('5.00'),
+            description='Steak for dinner',
+            ingridients='Steak, salt, pepper',
+        )
+
+        self.assertEqual(str(product), product.name)
