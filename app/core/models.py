@@ -55,10 +55,10 @@ class Product(models.Model):
     size = models.OneToOneField('Size',on_delete=models.CASCADE)
     stock = models.IntegerField(default=0)
     weight = models.DecimalField(max_digits=5, decimal_places=2)
-    avalability = models.BooleanField(default=True)
+    availability = models.BooleanField(default=True)
     price = models.DecimalField(max_digits=5, decimal_places=2)
     ingridients = models.CharField(max_length=255)
-    category = models.ForeignKey('Category', on_delete=models.CASCADE)
+    category = models.OneToOneField('Category', on_delete=models.CASCADE)
     link = models.CharField(max_length=255, blank=True)
 
     def __str__(self):

@@ -77,7 +77,7 @@ class ModelTests(TestCase):
             name='Steak',
             size= size,
             stock=10,
-            avalability=True,
+            availability=True,
             category=category,
             manufacturer= manufacturer,
             weight = Decimal('1.0'),

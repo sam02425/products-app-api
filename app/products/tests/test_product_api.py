@@ -9,14 +9,22 @@ from django.test import TestCase
 from django.contrib.auth import get_user_model
 from django.urls import reverse
 
-from rest_framework.test import status
+from rest_framework import status
 from rest_framework.test import APIClient
 
 from core.models import Product
+from core import models
 
-from products.serializers import ProductSerializer
+from products.serializers import (
+    ProductSerializer,
+    ProductDetailSerializer)
 
 PRODUCT_URL = reverse('products:product-list')
+
+
+def product_detail_url(product_id):
+    """Return product detail URL"""
+    return reverse('products:product-detail', args=[product_id])
 
 def create_product(user, **params):
     """Create and return a new product."""
@@ -26,16 +34,17 @@ def create_product(user, **params):
         'price': Decimal('10.00'),
         'weight': Decimal('1.00'),
         'stock': 10,
-        'avalability': True,
-        'category': 'Test Category',
-        'manufacturer': 'Test Manufacturer',
-        'size': 'Small',
-        link: 'http://example.com',
+        'availability': True,
+        'category': models.Category.objects.create(name='Test Category'),
+        'manufacturer': models.Manufacturer.objects.create(name='Test Manufacturer'),
+        'size': models.Size.objects.create(size='Small', weight=Decimal('0.5')),
+        'link': 'http://example.com',
     }
     defaults.update(params)
 
     product = Product.objects.create(user=user, **defaults)
     return product
+
 
 class PublicProductApiTests(TestCase):
     """Test unauthenticated product API access."""
@@ -56,7 +65,7 @@ class PrivateProductApiTests(TestCase):
         self.client = APIClient()
         self.user = get_user_model().objects.create_user(
             'user@example.com',
-            'testpass'
+            'testpass123'
         )
         self.client.force_authenticate(self.user)
 
@@ -76,7 +85,24 @@ class PrivateProductApiTests(TestCase):
         """Test retrieving products for user."""
         other_user = get_user_model().objects.create_user(
             'other@example.com',
-            'testpass2'
+            'password123',
         )
-        create_product(other_user)
-        product = create_product(self.user)
+        create_product(user = other_user)
+        create_product(user = self.user)
+
+        res = self.client.get(PRODUCT_URL)
+
+        products = Product.objects.filter(user=self.user)
+        serializer = ProductSerializer(products, many=True)
+        self.assertEqual(res.status_code, status.HTTP_200_OK)
+        self.assertEqual(res.data, serializer.data)
+
+    def test_get_product_detail(self):
+        """Test retrieving a product detail."""
+        product = create_product(user = self.user)
+
+        url = product_detail_url(product.id)
+        res = self.client.get(url)
+
+        serializer = ProductDetailSerializer(product)
+        self.assertEqual(res.data, serializer.data)
