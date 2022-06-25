@@ -50,40 +50,28 @@ class Product(models.Model):
         on_delete=models.CASCADE,
     )
     name = models.CharField(max_length=255)
-    manufacturer = models.OneToOneField('Manufacturer',on_delete=models.CASCADE)
+    manufacturer = models.CharField(max_length=255)
     description = models.TextField(blank=True)
-    size = models.OneToOneField('Size',on_delete=models.CASCADE)
+    size = models.CharField(max_length=255)
     stock = models.IntegerField(default=0)
     weight = models.DecimalField(max_digits=5, decimal_places=2)
     availability = models.BooleanField(default=True)
     price = models.DecimalField(max_digits=5, decimal_places=2)
     ingridients = models.CharField(max_length=255)
-    category = models.OneToOneField('Category', on_delete=models.CASCADE)
+    category = models.CharField(max_length=255)
     link = models.CharField(max_length=255, blank=True)
+    tags = models.ManyToManyField('Tag', blank=True)
 
     def __str__(self):
         return self.name
 
-class Manufacturer(models.Model):
-    """Manufacturer object"""
+class Tag(models.Model):
+    """Tag object"""
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+    )
     name = models.CharField(max_length=255)
-    link = models.CharField(max_length=255, blank=True)
-
-    def __str__(self):
-        return self.name
-
-class Size(models.Model):
-    """Size object"""
-    size = models.CharField(max_length=255)
-    weight = models.DecimalField(max_digits=5, decimal_places=2)
-
-    def __str__(self):
-        return self.name
-
-class Category(models.Model):
-    """Category object"""
-    name = models.CharField(max_length=255)
-    link = models.CharField(max_length=255, blank=True)
 
     def __str__(self):
         return self.name

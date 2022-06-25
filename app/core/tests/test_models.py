@@ -10,6 +10,10 @@ from django.contrib.auth import get_user_model
 
 from core import models
 
+def create_user(email="user@example.com", password="trial12345"):
+    """Create and return a new user."""
+    return get_user_model().objects.create_user(email, password)
+
 class ModelTests(TestCase):
     """Test models."""
 
@@ -59,27 +63,27 @@ class ModelTests(TestCase):
             'test123',
         )
 
-        size = models.Size.objects.create(
-            size='Small',
-            weight=Decimal('0.5'),
-        )
+        # size = models.Size.objects.create(
+        #     name='Small',
+        #     weight=Decimal('0.5'),
+        # )
 
-        manufacturer= models.Manufacturer.objects.create(
-            name='Test Manufacturer',
-        )
+        # manufacturer= models.Manufacturer.objects.create(
+        #     name='Test Manufacturer',
+        # )
 
-        category = models.Category.objects.create(
-            name='Test Catagory',
-        )
+        # category = models.Category.objects.create(
+        #     name='Test Catagory',
+        # )
 
         product = models.Product.objects.create(
             user=user,
             name='Steak',
-            size= size,
             stock=10,
             availability=True,
-            category=category,
-            manufacturer= manufacturer,
+            category= 'food',
+            manufacturer= 'xyz',
+            size= 'small',
             weight = Decimal('1.0'),
             price=Decimal('5.00'),
             description='Steak for dinner',
@@ -87,3 +91,12 @@ class ModelTests(TestCase):
         )
 
         self.assertEqual(str(product), product.name)
+
+    def test_create_tags(self):
+        """Test creating a tag"""
+        tag = models.Tag.objects.create(
+            user=create_user(),
+            name='Vegan',
+        )
+
+        self.assertEqual(str(tag), tag.name)
