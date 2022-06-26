@@ -27,6 +27,7 @@ def product_detail_url(product_id):
     """Return product detail URL"""
     return reverse('products:product-detail', args=[product_id])
 
+
 def create_product(user, **params):
     """Create and return a new product."""
     defaults = {
@@ -204,62 +205,105 @@ class PrivateProductApiTests(TestCase):
         self.assertEqual(res.status_code, status.HTTP_404_NOT_FOUND)
         self.assertEqual(Product.objects.filter(id=product.id).exists(), True)
 
-    def test_create_product_with_tags(self):
-        """Test creating a product with tags."""
+    # def test_create_product_with_tags(self):
+    #     """Test creating a product with tags."""
+    #     payload = {
+    #         'name': 'Test Product',
+    #         'description': 'Test description',
+    #         'price': Decimal('10.00'),
+    #         'weight': Decimal('1.00'),
+    #         'stock': 10,
+    #         'availability': True,
+    #         'category': 'food',
+    #         'manufacturer': 'xyz',
+    #         'size': 'small',
+    #         'link': 'http://example.com',
+    #         'tags': [{"name": 'healthy'}, {"name": 'fastfood'}]
+    #     }
+    #     res = self.client.post(PRODUCT_URL, payload)
+
+    #     self.assertEqual(res.status_code, status.HTTP_201_CREATED)
+    #     products = Product.objects.filter(user=self.user)
+    #     self.assertEqual(products.count(), 1)
+    #     product = products[0]
+    #     self.assertEqual(product.tags.count(), 2)
+    #     for tag in payload['tags']:
+    #         exists = product.tags.filter(
+    #             name=tag['name'],
+    #             user=self.user,
+    #         ).exists()
+    #         self.assertTrue(exists)
+
+    # def test_create_product_with_existing_tags(self):
+    #     """Test creating a product with existing tags."""
+    #     tag_meat_conitained = Tag.objects.create(user=self.user, name='meat')
+    #     payload = {
+    #         'name': 'Test Product',
+    #         'description': 'Test description',
+    #         'price': Decimal('10.00'),
+    #         'weight': Decimal('1.00'),
+    #         'stock': 10,
+    #         'availability': True,
+    #         'category': 'food',
+    #         'manufacturer': 'xyz',
+    #         'size': 'small',
+    #         'link': 'http://example.com',
+    #         'tags': [{"name": 'meat'}, {"name": 'fastfood'}],
+    #     }
+    #     res = self.client.post(PRODUCT_URL, payload)
+
+    #     self.assertEqual(res.status_code, status.HTTP_201_CREATED)
+    #     products = Product.objects.filter(user=self.user)
+    #     self.assertEqual(products.count(), 1)
+    #     product = products[0]
+    #     self.assertEqual(product.tags.count(), 2)
+    #     self.assertEqual(product.tags.all(), tag_meat_conitained.name)
+    #     for tag in payload['tags']:
+    #         exists = product.tags.filter(
+    #             name=tag['name'],
+    #             user=self.user,
+    #         ).exists()
+    #         self.assertTrue(exists)
+
+    def test_create_tag_on_update(self):
+        """Test creating a tag on update."""
+        product = create_product(user = self.user)
         payload = {
-            'name': 'Test Product',
-            'description': 'Test description',
-            'price': Decimal('10.00'),
-            'weight': Decimal('1.00'),
-            'stock': 10,
-            'availability': True,
-            'category': 'food',
-            'manufacturer': 'xyz',
-            'size': 'small',
-            'link': 'http://example.com',
-            'tags': [{"name": 'healthy'}, {"name": 'fastfood'}]
+            'tags': [{"name": 'Lunch'}]
         }
-        res = self.client.post(PRODUCT_URL, payload, format='json')
+        url = product_detail_url(product.id)
+        res = self.client.patch(url, payload, format='json')
 
-        self.assertEqual(res.status_code, status.HTTP_201_CREATED)
-        product = Product.objects.filter(user=self.user)
-        self.assertEqual(product.count(), 1)
-        product = product[0]
-        self.assertEqual(product.tags.count(), 2)
-        for tag in payload['tags']:
-            exists = Tag.objects.filter(
-                user=self.user,
-                name=tag['name']
-            ).exists()
-            self.assertTrue(exists)
+        self.assertEqual(res.status_code, status.HTTP_200_OK)
+        new_tag = Tag.objects.get(user=self.user, name='Lunch')
+        self.assertIn(new_tag, product.tags.all())
 
-    def test_create_product_with_existing_tags(self):
-        """Test creating a product with existing tags."""
-        tag_meat_conitained = Tag.object.create_tag(user=self.user, name='meat')
+    def test_update_product_assign_tag(self):
+        """Test updating a product to assign a tag."""
+        tag_meat_conitained = Tag.objects.create(user=self.user, name='meat')
+        product = create_product(user = self.user)
+        product.tags.add(tag_meat_conitained)
+
+        tag_lunch = Tag.objects.create(user=self.user, name='Lunch')
         payload = {
-            'name': 'Test Product',
-            'description': 'Test description',
-            'price': Decimal('10.00'),
-            'weight': Decimal('1.00'),
-            'stock': 10,
-            'availability': True,
-            'category': 'food',
-            'manufacturer': 'xyz',
-            'size': 'small',
-            'link': 'http://example.com',
-            'tags': [{"name": 'meat'}, {"name": 'fastfood'}]
-        }
-        res = self.client.post(PRODUCT_URL, payload, format='json')
+            'tags': [{"name": 'Lunch'}]
+            }
+        url = product_detail_url(product.id)
+        res = self.client.patch(url, payload, format='json')
 
-        self.assertEqual(res.status_code, status.HTTP_201_CREATED)
-        product = Product.objects.filter(user=self.user)
-        self.assertEqual(product.count(), 1)
-        product = product[0]
-        self.assertEqual(product.tags.count(), 2)
-        self.assertEqual(product.tags.all(), tag_meat_conitained.name)
-        for tag in payload['tags']:
-            exists = Tag.objects.filter(
-                user=self.user,
-                name=tag['name']
-            ).exists()
-            self.assertTrue(exists)
+        self.assertEqual(res.status_code, status.HTTP_200_OK)
+        self.assertIn(tag_lunch, product.tags.all())
+        self.assertNotIn(tag_meat_conitained, product.tags.all())
+
+    def test_clear_product_tags(self):
+        """Test clearing a recipes tags."""
+        tag = Tag.objects.create(user=self.user, name='Dessert')
+        recipe = create_product(user=self.user)
+        recipe.tags.add(tag)
+
+        payload = {'tags': []}
+        url = product_detail_url(recipe.id)
+        res = self.client.patch(url, payload, format='json')
+
+        self.assertEqual(res.status_code, status.HTTP_200_OK)
+        self.assertEqual(recipe.tags.count(), 0)

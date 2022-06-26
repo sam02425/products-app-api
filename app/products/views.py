@@ -35,9 +35,9 @@ class ProductViewSet(viewsets.ModelViewSet):
 
 
 class TagViewSet(mixins.DestroyModelMixin,
-                mixins.UpdateModelMixin,
-                mixins.ListModelMixin,
-                viewsets.GenericViewSet):
+                 mixins.UpdateModelMixin,
+                 mixins.ListModelMixin,
+                 viewsets.GenericViewSet):
     """ViewSet for the Tag class."""
     serializer_class = serializers.TagSerializer
     queryset = Tag.objects.all()
@@ -48,13 +48,13 @@ class TagViewSet(mixins.DestroyModelMixin,
         """Retrieve the tags for the authenticated user."""
         return self.queryset.filter(user=self.request.user).order_by('-name')
 
-    def get_Serializer_class(self):
-        """Add the request user to the serializer context."""
-        if self.action == 'list':
-            return serializers.TagSerializer
+    # def get_Serializer_class(self):
+    #     """Add the request user to the serializer context."""
+    #     if self.action == 'list':
+    #         return serializers.TagSerializer
 
-        return self.serializer_class
+    #     return self.serializer_class
 
-    def perform_create(self, serializer):
-        """Create a new tag for the authenticated user."""
-        serializer.save(user=self.request.user)
+    # def perform_create(self, serializer):
+    #     """Create a new tag for the authenticated user."""
+    #     serializer.save(user=self.request.user)
