@@ -79,15 +79,12 @@ class ModelTests(TestCase):
         product = models.Product.objects.create(
             user=user,
             name='Steak',
+            brand='Test Brand',
             stock=10,
             availability=True,
-            category= 'food',
-            manufacturer= 'xyz',
-            size= 'small',
             weight = Decimal('1.0'),
             price=Decimal('5.00'),
             description='Steak for dinner',
-            ingridients='Steak, salt, pepper',
         )
 
         self.assertEqual(str(product), product.name)
@@ -100,3 +97,33 @@ class ModelTests(TestCase):
         )
 
         self.assertEqual(str(tag), tag.name)
+
+    def test_create_ingridients(self):
+        """Test creating an ingridient"""
+        ingredient = models.Ingredient.objects.create(
+            user=create_user(),
+            name='Salt',
+        )
+
+        self.assertEqual(str(ingredient), ingredient.name)
+
+    def test_create_size(self):
+        """Test creating a size"""
+        size = models.Size.objects.create(
+            user=create_user(),
+            name='Small',
+            product_Type='powder',
+            amount=Decimal('0.5'),
+            amount_Unit='kg',
+        )
+
+        self.assertEqual(str(size), size.name)
+
+    def test_category_str(self):
+        """Test the category string representation"""
+        category = models.Category.objects.create(
+            user=create_user(),
+            name='Test Category',
+        )
+
+        self.assertEqual(str(category), category.name)

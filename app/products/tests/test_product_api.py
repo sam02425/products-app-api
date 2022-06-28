@@ -32,14 +32,12 @@ def create_product(user, **params):
     """Create and return a new product."""
     defaults = {
         'name': 'Test Product',
+        'brand': 'Test Brand',
         'description': 'Test description',
         'price': Decimal('10.00'),
         'weight': Decimal('1.00'),
         'stock': 10,
         'availability': True,
-        'category': 'food',
-        'manufacturer': 'xyz',
-        'size': 'small',
         'link': 'http://example.com',
     }
     defaults.update(params)
@@ -114,14 +112,12 @@ class PrivateProductApiTests(TestCase):
         """Test creating a product."""
         payload = {
             'name': 'Test Product',
+            'brand': 'Test Brand',
             'description': 'Test description',
             'price': Decimal('10.00'),
             'weight': Decimal('1.00'),
             'stock': 10,
             'availability': True,
-            'category': 'food',
-            'manufacturer': 'xyz',
-            'size': 'small',
             'link': 'http://example.com',
         }
         res = self.client.post(PRODUCT_URL, payload)
@@ -209,15 +205,13 @@ class PrivateProductApiTests(TestCase):
     #     """Test creating a product with tags."""
     #     payload = {
     #         'name': 'Test Product',
-    #         'description': 'Test description',
-    #         'price': Decimal('10.00'),
-    #         'weight': Decimal('1.00'),
-    #         'stock': 10,
-    #         'availability': True,
-    #         'category': 'food',
-    #         'manufacturer': 'xyz',
-    #         'size': 'small',
-    #         'link': 'http://example.com',
+            # 'brand': 'Test Brand',
+            # 'description': 'Test description',
+            # 'price': Decimal('10.00'),
+            # 'weight': Decimal('1.00'),
+            # 'stock': 10,
+            # 'availability': True,
+            # 'link': 'http://example.com',
     #         'tags': [{"name": 'healthy'}, {"name": 'fastfood'}]
     #     }
     #     res = self.client.post(PRODUCT_URL, payload)

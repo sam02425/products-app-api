@@ -48,23 +48,61 @@ class Product(models.Model):
         on_delete=models.CASCADE,
     )
     name = models.CharField(max_length=255)
-    manufacturer = models.CharField(max_length=255)
+    brand = models.CharField(max_length=255)
     description = models.TextField(blank=True)
-    size = models.CharField(max_length=255)
     stock = models.IntegerField(default=0)
     weight = models.DecimalField(max_digits=5, decimal_places=2)
     availability = models.BooleanField(default=True)
     price = models.DecimalField(max_digits=5, decimal_places=2)
-    ingridients = models.CharField(max_length=255)
-    category = models.CharField(max_length=255)
     link = models.CharField(max_length=255, blank=True)
     tags = models.ManyToManyField('Tag', blank=True)
+    ingridients = models.ManyToManyField('Ingredient',blank=True)
+    size = models.ManyToManyField('Size',blank=True)
+    category = models.ManyToManyField('Category',blank=True)
 
     def __str__(self):
         return self.name
 
 class Tag(models.Model):
     """Tag object"""
+    name = models.CharField(max_length=255)
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+    )
+
+    def __str__(self):
+        return self.name
+
+
+class Ingredient(models.Model):
+    """Ingredient object"""
+    name = models.CharField(max_length=255)
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+    )
+
+    def __str__(self):
+        return self.name
+
+
+class Size(models.Model):
+    """Size object"""
+    name = models.CharField(max_length=255)
+    product_Type = models.CharField(max_length=255)
+    amount = models.DecimalField(max_digits=5, decimal_places=2)
+    amount_Unit = models.CharField(max_length=255)
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+    )
+    def __str__(self):
+        return self.name
+
+
+class Category(models.Model):
+    """Catagory object"""
     name = models.CharField(max_length=255)
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
