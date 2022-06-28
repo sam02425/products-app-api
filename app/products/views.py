@@ -7,7 +7,7 @@ from rest_framework import (
     viewsets,
     mixins,)
 
-from core.models import (Product, Tag)
+from core.models import (Product, Tag, Ingredient, Size, Category,)
 from products import serializers
 
 
@@ -55,6 +55,67 @@ class TagViewSet(mixins.DestroyModelMixin,
 
     #     return self.serializer_class
 
-    # def perform_create(self, serializer):
-    #     """Create a new tag for the authenticated user."""
-    #     serializer.save(user=self.request.user)
+    def perform_create(self, serializer):
+        """Create a new tag for the authenticated user."""
+        serializer.save(user=self.request.user)
+
+
+class IngredientViewSet(mixins.ListModelMixin,
+                        viewsets.GenericViewSet,
+                        mixins.CreateModelMixin,
+                        mixins.DestroyModelMixin,
+                        mixins.UpdateModelMixin):
+    """Manage ingredients in the database."""
+    serializer_class = serializers.IngredientSerializer
+    queryset = Ingredient.objects.all()
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        """Filter queryset to authenticated user."""
+        return self.queryset.filter(user=self.request.user).order_by('-name')
+
+    def perform_create(self, serializer):
+        """Create a new ingredient for the authenticated user."""
+        serializer.save(user=self.request.user)
+
+
+class SizeViewSet(mixins.ListModelMixin,
+                viewsets.GenericViewSet,
+                mixins.CreateModelMixin,
+                mixins.DestroyModelMixin,
+                mixins.UpdateModelMixin):
+    """Manage sizes in the database."""
+    serializer_class = serializers.SizeSerializer
+    queryset = Size.objects.all()
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        """Filter queryset to authenticated user."""
+        return self.queryset.filter(user=self.request.user).order_by('-name')
+
+    def perform_create(self, serializer):
+        """Create a new size for the authenticated user."""
+        serializer.save(user=self.request.user)
+
+
+class CategoryViewSet(mixins.ListModelMixin,
+                    viewsets.GenericViewSet,
+                    mixins.CreateModelMixin,
+                    mixins.DestroyModelMixin,
+                    mixins.UpdateModelMixin):
+    """Manage categories in the database."""
+    serializer_class = serializers.CategorySerializer
+    queryset = Category.objects.all()
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        """Filter queryset to authenticated user."""
+        return self.queryset.filter(user=self.request.user).order_by('-name')
+
+    def perform_create(self, serializer):
+        """Create a new category for the authenticated user."""
+        serializer.save(user=self.request.user)
+

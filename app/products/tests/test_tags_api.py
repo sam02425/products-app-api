@@ -46,8 +46,8 @@ def PrivateTagsApiTests(TestCase):
 
     def test_retrieve_tags(self):
         """Test retrieving tags"""
-        Tag.objects.create(user=self.user, name='Vegan')
-        Tag.objects.create(user=self.user, name='Dessert')
+        Tag.objects.create(user=self.user, name='Vegan', description='Vegan food')
+        Tag.objects.create(user=self.user, name='Dessert', description='Desserts')
 
         res = self.client.get(TAGS_URL)
 
@@ -61,8 +61,8 @@ def PrivateTagsApiTests(TestCase):
         user2 = create_user(
             email='user2@example.com', password='testpass123'
         )
-        Tag.objects.create(user=user2, name='Fruity')
-        tag = Tag.objects.create(user=self.user, name='Comfort Food')
+        Tag.objects.create(user=user2, name='Fruity', description='Fruity food')
+        tag = Tag.objects.create(user=self.user, name='Comfort Food', description='Good for you')
 
         res = self.client.get(TAGS_URL)
 
@@ -73,9 +73,9 @@ def PrivateTagsApiTests(TestCase):
 
     def test_update_tag(self):
         """Test updating a tag with a patch request"""
-        tag = Tag.objects.create(user=self.user, name='Vegitarian')
+        tag = Tag.objects.create(user=self.user, name='Vegitarian', description='Vegan food')
 
-        payload = {'name': 'Vegitarian Food'}
+        payload = {'name': 'Vegan', 'description': 'Vegan food'}
         url = detail_url(tag.id)
         res = self.client.patch(url, payload)
 
@@ -86,7 +86,7 @@ def PrivateTagsApiTests(TestCase):
 
     def test_delete_tag(self):
         """Test deleting a tag"""
-        tag = Tag.objects.create(user=self.user, name='Vegan')
+        tag = Tag.objects.create(user=self.user, name='Vegan', description='Vegan food')
 
         url = detail_url(tag.id)
         res = self.client.delete(url)

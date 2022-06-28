@@ -13,6 +13,10 @@ from products import views
 router = DefaultRouter()
 router.register('products', views.ProductViewSet)
 router.register('tags', views.TagViewSet)
+router.register('sizes', views.SizeViewSet)
+router.register('ingredients', views.IngredientViewSet)
+router.register('categories', views.CategoryViewSet)
+
 
 app_name = 'products'
 

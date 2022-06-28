@@ -103,6 +103,8 @@ class ModelTests(TestCase):
         ingredient = models.Ingredient.objects.create(
             user=create_user(),
             name='Salt',
+            ingredient_Amount=Decimal('0.5'),
+            ingredient_Amount_Unit='kg',
         )
 
         self.assertEqual(str(ingredient), ingredient.name)

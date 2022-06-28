@@ -5,7 +5,37 @@ from rest_framework import serializers
 
 from core.models import (
     Product,
-    Tag)
+    Tag,
+    Ingredient,
+    Size,
+    Category,)
+
+
+class CategorySerializer(serializers.ModelSerializer):
+    """Serializer for ingredients."""
+
+    class Meta:
+        model = Category
+        fields = ['id', 'name', 'description']
+        read_only_fields = ['id']
+
+
+class SizeSerializer(serializers.ModelSerializer):
+    """Serializer for ingredients."""
+
+    class Meta:
+        model = Size
+        fields = ['id', 'name', 'description' , 'product_Type', 'amount', 'amount_Unit']
+        read_only_fields = ['id']
+
+
+class IngredientSerializer(serializers.ModelSerializer):
+    """Serializer for ingredients."""
+
+    class Meta:
+        model = Ingredient
+        fields = ['id', 'name', 'description', 'ingredient_Amount','ingredient_Amount_Unit']
+        read_only_fields = ['id']
 
 
 class TagSerializer(serializers.ModelSerializer):
@@ -13,7 +43,7 @@ class TagSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Tag
-        fields = ['id','name']
+        fields = ['id','name', 'description']
         read_only_fields = ['id']
 
 

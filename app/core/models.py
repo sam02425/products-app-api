@@ -66,6 +66,7 @@ class Product(models.Model):
 class Tag(models.Model):
     """Tag object"""
     name = models.CharField(max_length=255)
+    description = models.TextField(blank=True)
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
@@ -78,6 +79,9 @@ class Tag(models.Model):
 class Ingredient(models.Model):
     """Ingredient object"""
     name = models.CharField(max_length=255)
+    description = models.TextField(blank=True)
+    ingredient_Amount = models.DecimalField(max_digits=5, decimal_places=2)
+    ingredient_Amount_Unit = models.CharField(max_length=255)
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
@@ -90,6 +94,7 @@ class Ingredient(models.Model):
 class Size(models.Model):
     """Size object"""
     name = models.CharField(max_length=255)
+    description = models.TextField(blank=True)
     product_Type = models.CharField(max_length=255)
     amount = models.DecimalField(max_digits=5, decimal_places=2)
     amount_Unit = models.CharField(max_length=255)
@@ -104,6 +109,7 @@ class Size(models.Model):
 class Category(models.Model):
     """Catagory object"""
     name = models.CharField(max_length=255)
+    description = models.TextField(blank=True)
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
