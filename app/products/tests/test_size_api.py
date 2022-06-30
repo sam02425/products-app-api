@@ -44,8 +44,8 @@ class PrivatesizesApiTests(TestCase):
 
     def test_retrieve_sizes(self):
         """Test retrieving a list of sizes."""
-        Size.objects.create(user=self.user, name='small', description='small size', product_Type='liquid', amount=1, amount_Unit='ml')
-        Size.objects.create(user=self.user, name='large', description='large size', product_Type='liquid', amount=1, amount_Unit='ml')
+        Size.objects.create(user=self.user, name='small', description='small size', product_Type='liquid', amount=1, amount_Unit='ml',created_At= '4/5/2019', updated_At='4/5/2020')
+        Size.objects.create(user=self.user, name='large', description='large size', product_Type='liquid', amount=1, amount_Unit='ml',created_At= '4/5/2019', updated_At='4/5/2020')
 
         res = self.client.get(SIZE_URL)
 
@@ -57,8 +57,8 @@ class PrivatesizesApiTests(TestCase):
     def test_sizes_limited_to_user(self):
         """Test list of sizes is limited to authenticated user."""
         user2 = create_user(email='user2@example.com')
-        Size.objects.create(user=user2, name='small', description='small size', product_Type='liquid', amount=1, amount_Unit='ml')
-        size = Size.objects.create(user=self.user, name='xlarge', description='large size', product_Type='powder', amount=1, amount_Unit='ml')
+        Size.objects.create(user=user2, name='small', description='small size', product_Type='liquid', amount=1, amount_Unit='ml',created_At= '4/5/2019', updated_At='4/5/2020')
+        size = Size.objects.create(user=self.user, name='xlarge', description='large size', product_Type='powder', amount=1, amount_Unit='ml',created_At= '4/5/2019', updated_At='4/5/2020')
 
         res = self.client.get(SIZE_URL)
 

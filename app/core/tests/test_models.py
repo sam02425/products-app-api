@@ -2,7 +2,7 @@
 Tests for models.
 """
 from decimal import Decimal
-from pydoc import describe
+from os import link
 
 from unittest import expectedFailure
 from django.test import TestCase
@@ -57,7 +57,7 @@ class ModelTests(TestCase):
         self.assertTrue(user.is_staff)
 
     def test_create_product(self):
-        """Test creating a recipe"""
+        """Test creating a product"""
         user = get_user_model().objects.create_user(
             'test@example.com',
             'test123',
@@ -84,7 +84,12 @@ class ModelTests(TestCase):
             availability=True,
             weight = Decimal('1.0'),
             price=Decimal('5.00'),
+            link='https://www.google.com',
             description='Steak for dinner',
+            created_At = '2020-01-01',
+            created_By = user,
+            updated_At = '2020-01-01',
+            updated_By = user,
         )
 
         self.assertEqual(str(product), product.name)

@@ -16,6 +16,11 @@ from products.serializers import IngredientSerializer
 INGREDIENTS_URL = reverse('products:ingredient-list')
 
 
+def detail_url(ingredient_id):
+    """Create and return an ingredient detail URL."""
+    return reverse('recipe:ingredient-detail', args=[ingredient_id])
+
+
 def create_user(email='user@example.com', password='testpass123'):
     """Create and return user."""
     return get_user_model().objects.create_user(email=email, password=password)
@@ -44,8 +49,8 @@ class PrivateIngredientsApiTests(TestCase):
 
     def test_retrieve_ingredients(self):
         """Test retrieving a list of ingredients."""
-        Ingredient.objects.create(user=self.user, name='Kale', ingredient_Amount=1.0, ingredient_Amount_Unit='kg', description='Kale is a good vegetable')
-        Ingredient.objects.create(user=self.user, name='Vanilla',ingredient_Amount=1.0, ingredient_Amount_Unit='kg', description='Vanilla is a good sweetener')
+        Ingredient.objects.create(user=self.user, name='Kale', ingredient_Amount=1.0, ingredient_Amount_Unit='kg', description='Kale is a good vegetable',created_At= '4/5/2019', updated_At='4/5/2020')
+        Ingredient.objects.create(user=self.user, name='Vanilla',ingredient_Amount=1.0, ingredient_Amount_Unit='kg', description='Vanilla is a good sweetener',created_At= '4/5/2019', updated_At='4/5/2020')
 
         res = self.client.get(INGREDIENTS_URL)
 
@@ -57,8 +62,8 @@ class PrivateIngredientsApiTests(TestCase):
     def test_ingredients_limited_to_user(self):
         """Test list of ingredients is limited to authenticated user."""
         user2 = create_user(email='user2@example.com')
-        Ingredient.objects.create(user=user2, name='Salt', ingredient_Amount=1.0, ingredient_Amount_Unit='kg', description='Salt is a good salt')
-        ingredient = Ingredient.objects.create(user=self.user, name='Pepper', ingredient_Amount=1.0, ingredient_Amount_Unit='kg', description='Pepper is a good pepper')
+        Ingredient.objects.create(user=user2, name='Salt', ingredient_Amount=1.0, ingredient_Amount_Unit='kg', description='Salt is a good salt',created_At= '4/5/2019', updated_At='4/5/2020')
+        ingredient = Ingredient.objects.create(user=self.user, name='Pepper', ingredient_Amount=1.0, ingredient_Amount_Unit='kg', description='Pepper is a good pepper',created_At= '4/5/2019', updated_At='4/5/2020')
 
         res = self.client.get(INGREDIENTS_URL)
 
@@ -66,3 +71,26 @@ class PrivateIngredientsApiTests(TestCase):
         self.assertEqual(len(res.data), 1)
         self.assertEqual(res.data[0]['name'], ingredient.name)
         self.assertEqual(res.data[0]['id'], ingredient.id)
+
+    def test_update_ingredient(self):
+        """Test updating an ingredient."""
+        ingredient = Ingredient.objects.create(user=self.user, name='Cilantro')
+
+        payload = [{'name': 'Coriander','ingredient_Amount': 1.0, 'ingredient_Amount_Unit': 'kg', 'description': 'Coriander is a good vegetable'}]
+        url = detail_url(ingredient.id)
+        res = self.client.patch(url, payload)
+
+        self.assertEqual(res.status_code, status.HTTP_200_OK)
+        ingredient.refresh_from_db()
+        self.assertEqual(ingredient.name, payload['name'])
+
+    def test_delete_ingredient(self):
+        """Test deleting an ingredient."""
+        ingredient = Ingredient.objects.create(user=self.user, name='Cilantro')
+
+        url = detail_url(ingredient.id)
+        res = self.client.delete(url)
+
+        self.assertEqual(res.status_code, status.HTTP_204_NO_CONTENT)
+        ingredients = Ingredient.objects.filter(user=self.user)
+        self.assertFalse(ingredients.exists())

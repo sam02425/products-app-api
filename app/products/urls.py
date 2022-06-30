@@ -16,6 +16,8 @@ router.register('tags', views.TagViewSet)
 router.register('sizes', views.SizeViewSet)
 router.register('ingredients', views.IngredientViewSet)
 router.register('categories', views.CategoryViewSet)
+router.register('categories', views.ManufacturerViewSet)
+
 
 
 app_name = 'products'

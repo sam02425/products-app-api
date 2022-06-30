@@ -1,7 +1,6 @@
 """
 Database models
 """
-from pydoc import describe
 from django.conf import settings
 from django.db import models
 from django.contrib.auth.models import ( AbstractBaseUser, BaseUserManager, PermissionsMixin,)
@@ -59,6 +58,11 @@ class Product(models.Model):
     ingridients = models.ManyToManyField('Ingredient',blank=True)
     size = models.ManyToManyField('Size',blank=True)
     category = models.ManyToManyField('Category',blank=True)
+    manufacturer = models.ManyToManyField('Manufacturer',blank=True)
+    created_At = models.DateTimeField(auto_now_add=True)
+    created_By = models.ForeignKey('User', related_name='creator' ,on_delete=models.CASCADE)
+    updated_At = models.DateTimeField(auto_now=True)
+    updated_By = models.ForeignKey('User', related_name='updater' ,on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
@@ -67,6 +71,22 @@ class Tag(models.Model):
     """Tag object"""
     name = models.CharField(max_length=255)
     description = models.TextField(blank=True)
+    created_At = models.DateTimeField(auto_now_add=True)
+    updated_At = models.DateTimeField(auto_now=True)
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+    )
+
+    def __str__(self):
+        return self.name
+
+
+class Manufacturer(models.Model):
+    """Manufacturer object"""
+    name = models.CharField(max_length=255)
+    description = models.TextField(blank=True)
+
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
@@ -82,6 +102,9 @@ class Ingredient(models.Model):
     description = models.TextField(blank=True)
     ingredient_Amount = models.DecimalField(max_digits=5, decimal_places=2)
     ingredient_Amount_Unit = models.CharField(max_length=255)
+    created_At = models.DateTimeField(auto_now_add=True)
+    updated_At = models.DateTimeField(auto_now=True)
+
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
@@ -98,6 +121,8 @@ class Size(models.Model):
     product_Type = models.CharField(max_length=255)
     amount = models.DecimalField(max_digits=5, decimal_places=2)
     amount_Unit = models.CharField(max_length=255)
+    created_At = models.DateTimeField(auto_now_add=True)
+    updated_At = models.DateTimeField(auto_now=True)
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,

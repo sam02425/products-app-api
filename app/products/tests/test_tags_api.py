@@ -46,8 +46,8 @@ def PrivateTagsApiTests(TestCase):
 
     def test_retrieve_tags(self):
         """Test retrieving tags"""
-        Tag.objects.create(user=self.user, name='Vegan', description='Vegan food')
-        Tag.objects.create(user=self.user, name='Dessert', description='Desserts')
+        Tag.objects.create(user=self.user, name='Vegan', description='Vegan food', created_At= '4/5/2019', updated_At='4/5/2020')
+        Tag.objects.create(user=self.user, name='Dessert', description='Desserts', created_At= '4/5/2019', updated_At='4/5/2020')
 
         res = self.client.get(TAGS_URL)
 
@@ -61,8 +61,8 @@ def PrivateTagsApiTests(TestCase):
         user2 = create_user(
             email='user2@example.com', password='testpass123'
         )
-        Tag.objects.create(user=user2, name='Fruity', description='Fruity food')
-        tag = Tag.objects.create(user=self.user, name='Comfort Food', description='Good for you')
+        Tag.objects.create(user=user2, name='Fruity', description='Fruity food',created_At= '4/5/2019', updated_At='4/5/2020')
+        tag = Tag.objects.create(user=self.user, name='Comfort Food', description='Good for you', created_At= '4/5/2019', updated_At='4/5/2020')
 
         res = self.client.get(TAGS_URL)
 
@@ -73,9 +73,9 @@ def PrivateTagsApiTests(TestCase):
 
     def test_update_tag(self):
         """Test updating a tag with a patch request"""
-        tag = Tag.objects.create(user=self.user, name='Vegitarian', description='Vegan food')
+        tag = Tag.objects.create(user=self.user, name='Vegitarian', description='Vegan food', created_At= '4/5/2019', updated_At='4/5/2020')
 
-        payload = {'name': 'Vegan', 'description': 'Vegan food'}
+        payload = {'name': 'Vegan', 'description': 'Vegan food', 'created_At': '4/5/2019', 'updated_At': '4/5/2020'}
         url = detail_url(tag.id)
         res = self.client.patch(url, payload)
 
@@ -86,7 +86,7 @@ def PrivateTagsApiTests(TestCase):
 
     def test_delete_tag(self):
         """Test deleting a tag"""
-        tag = Tag.objects.create(user=self.user, name='Vegan', description='Vegan food')
+        tag = Tag.objects.create(user=self.user, name='Vegan', description='Vegan food',created_At= '4/5/2019', updated_At='4/5/2020')
 
         url = detail_url(tag.id)
         res = self.client.delete(url)
